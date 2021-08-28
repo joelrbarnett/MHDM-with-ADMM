@@ -74,32 +74,32 @@ end
 
 
 %Plot montage of multiscales near optimal
-% figure()
-% numPlots =min(9,length(xkArray(1,1,1,:)));
-% montage(xkArray(:,:,:,end-numPlots+1:end),gray(256))
-% 
-% titleStr = "Multiscales k = "+num2str(numScales -numPlots+1)+" through k= "+num2str(numScales);
-% title(titleStr,'FontSize',16)
-% 
-% if saveFlag==1
-%     figName=filePrefix+figPrefix+"multiscales.png";
-%     saveas(gcf,figName)
-% end
-% 
-% %Plot montage of residuals near optimal
-% figure()
-% numPlots =min(9,length(xkArray(1,1,1,:)));
-% residuals = xkArray;
-% residuals(:,:,1,:) = abs(F_orig-residuals(:,:,1,:))+125;
-% montage(residuals(:,:,:,end-numPlots+1:end),gray(256))
-% 
-% titleStr = "Residuals k = "+num2str(numScales -numPlots+1)+" through k= "+num2str(numScales);
-% title(titleStr,'FontSize',16)
-% 
-% if saveFlag==1
-%     figName=filePrefix+figPrefix+"residuals.png";
-%     saveas(gcf,figName)
-% end
+figure()
+numPlots =min(9,length(xkArray(1,1,1,:)));
+montage(xkArray(:,:,:,end-numPlots+1:end),gray(256))
+
+titleStr = "Multiscales k = "+num2str(numScales -numPlots+1)+" through k= "+num2str(numScales);
+title(titleStr,'FontSize',16)
+
+if saveFlag==1
+    figName=filePrefix+figPrefix+"multiscales.png";
+    saveas(gcf,figName)
+end
+
+%Plot montage of residuals near optimal
+figure()
+numPlots =min(9,length(xkArray(1,1,1,:)));
+residuals = xkArray;
+residuals(:,:,1,:) = abs(F_orig-residuals(:,:,1,:))+125;
+montage(residuals(:,:,:,end-numPlots+1:end),gray(256))
+
+titleStr = "Residuals k = "+num2str(numScales -numPlots+1)+" through k= "+num2str(numScales);
+title(titleStr,'FontSize',16)
+
+if saveFlag==1
+    figName=filePrefix+figPrefix+"residuals.png";
+    saveas(gcf,figName)
+end
 
 %Plot the RMSE and SNR, as well as the stopping criterion plot
 figure('position',[100,100,1150,400])

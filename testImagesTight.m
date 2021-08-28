@@ -27,7 +27,7 @@ imagesPNG=["barbara.png","pollen.png","mandril.png","circles.png","geometry.png"
 for j=7:7%1:length(images) %loop over all images
     close all;
     %filenames for saving
-    filePrefix="tight/"+fileNames(j)+"_noise_tight/";
+    filePrefix="./tight/"+fileNames(j)+"_noise_tight/";
     figPrefix=fileNames(j)+"_";
 
     %read in image and noisy image
@@ -39,16 +39,16 @@ for j=7:7%1:length(images) %loop over all images
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %setup parameters
     [n,m]=size(F_orig);
-    numScales=15;
+    numScales=12;
     %algo parameters
     maxIters=1000; %time iterations in solving for wk
     dt=0.01; %0.025; %timestep
     epsilon= 0.01; %for regularizing TV
     lambda0=0.01; %intial lambda
     alp0=1; %initial lamba
-    q=2; %for update ratio for lambda: lambda_k = lambda0*q^k;
+    q=3; %for update ratio for lambda: lambda_k = lambda0*q^k;
     params=[maxIters, dt, epsilon, lambda0,q, alp0];%to pass to plotting function
-    tightFlag=[0,0]; %to pass to plotting and metrics functions
+    tightFlag=[1,alp0]; %to pass to plotting and metrics functions
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,6 +97,7 @@ for j=7:7%1:length(images) %loop over all images
     %Plot 
     saveFlag=0;
     if saveFlag==1
+        mkdir(char(filePrefix));
         save(filePrefix+figPrefix+"vars",'F_orig', 'F_data', 'xkArray','params','filePrefix','figPrefix','saveFlag','tightFlag', 'numScales')
     end
     plotFigsOsher_new(F_orig, F_data, xkArray,params,filePrefix,figPrefix,saveFlag,tightFlag)
